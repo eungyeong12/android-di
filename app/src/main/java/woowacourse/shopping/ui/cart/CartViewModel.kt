@@ -38,8 +38,11 @@ class CartViewModel : ViewModel() {
     }
 
     fun deleteCartProduct(id: Long) {
-        viewModelScope.launch { cartRepository.deleteCartProduct(id) }
-        getAllCartProducts()
-        viewModelScope.launch { _onCartProductDeleted.emit(Unit) }
+        viewModelScope.launch {
+            cartRepository.deleteCartProduct(id)
+            val cartProducts = cartRepository.getAllCartProducts()
+            _uiState.update { it.copy(cartProducts = cartProducts) }
+            _onCartProductDeleted.emit(Unit)
+        }
     }
 }
