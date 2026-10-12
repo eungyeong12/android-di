@@ -9,7 +9,6 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import woowacourse.shopping.ui.cart.CartScreen
 import woowacourse.shopping.ui.cart.CartScreenScopeViewModel
-import woowacourse.shopping.ui.cart.CartScreenScopeViewModelFactory
 import woowacourse.shopping.ui.cart.ScreenEntryIdKey
 import woowacourse.shopping.ui.products.ProductsScreen
 
@@ -39,7 +38,7 @@ fun ShoppingNavHost(navController: NavHostController = rememberNavController()) 
             val cartScopeViewModel =
                 viewModel<CartScreenScopeViewModel>(
                     viewModelStoreOwner = backStackEntry,
-                    factory = CartScreenScopeViewModelFactory,
+                    factory = ViewModelFactory,
                     extras = extras,
                 )
 

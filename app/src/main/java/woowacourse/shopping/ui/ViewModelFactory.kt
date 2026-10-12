@@ -3,11 +3,13 @@ package woowacourse.shopping.ui
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewmodel.CreationExtras
+import woowacourse.shopping.ScreenScope
 import woowacourse.shopping.ShoppingApplication
 import woowacourse.shopping.ViewModelScope
 import woowacourse.shopping.appScopeKey
 import woowacourse.shopping.di.DependencyKey
 import woowacourse.shopping.di.ScopeKey
+import woowacourse.shopping.ui.cart.ScreenEntryIdKey
 import java.util.UUID
 import kotlin.reflect.KClass
 
@@ -22,7 +24,14 @@ object ViewModelFactory : ViewModelProvider.Factory {
                 ?: error("ShoppingApplication을 찾을 수 없습니다")
         val diContainer = application.diContainer
 
-        val scopeKey = ScopeKey(ViewModelScope, UUID.randomUUID().toString())
+        val entryId = extras[ScreenEntryIdKey]
+
+        val scopeKey =
+            if (entryId != null) {
+                ScopeKey(ScreenScope, entryId)
+            } else {
+                ScopeKey(ViewModelScope, UUID.randomUUID().toString())
+            }
         diContainer.openScope(scopeKey, parentKey = appScopeKey)
 
         try {
