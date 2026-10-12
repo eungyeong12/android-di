@@ -6,14 +6,11 @@ import androidx.lifecycle.viewmodel.CreationExtras
 import woowacourse.shopping.ScreenScope
 import woowacourse.shopping.ShoppingApplication
 import woowacourse.shopping.appScopeKey
-import woowacourse.shopping.di.DIContainer
 import woowacourse.shopping.di.DependencyKey
 import woowacourse.shopping.di.ScopeKey
 import kotlin.jvm.java
 
 object ScreenEntryIdKey : CreationExtras.Key<String>
-
-object DIContainerKey : CreationExtras.Key<DIContainer>
 
 class CartScreenScopeViewModel(
     val dateFormatter: DateFormatter,
